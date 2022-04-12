@@ -1,12 +1,11 @@
-#include "polynomial.h"
+#include "linked_list.h"
 #include <iostream>
 
-int main()
-{
-    polynomial::polynomial p1{{1.0, 0.0}, {1.0, 1.0}}, p2{{1.0, 0.0}, {-1.0, 1.0}};
-    polynomial::polynomial p3 = p1 * p2;
-
-    
+int main() {
+    container::linked_list<int> l{1,2,3,4,5,6};
+    for(std::size_t i=0;i<6;++i){
+        std::cout<<l[i]<<std::endl;
+    }
 
     return 0;
 }

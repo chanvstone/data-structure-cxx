@@ -7,18 +7,16 @@
 #include <memory>
 #include <stdexcept>
 
-namespace polynomial
-{
+namespace polynomial {
     //单个项
-    class term
-    {
+    class term {
     public:
         double factor;   //系数
         double exponent; //指数
 
     public:
         term(double factor = 0.0, double exponent = 0.0)
-            : factor{factor}, exponent{exponent} {}
+                : factor{factor}, exponent{exponent} {}
 
         term operator+(const term &t) const;
         term &operator+=(const term &t);
@@ -40,8 +38,7 @@ namespace polynomial
     };
 
     //多项式
-    class polynomial
-    {
+    class polynomial {
     private:
         std::map<double, term> terms;
 

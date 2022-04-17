@@ -12,6 +12,7 @@ namespace polynomial {
         CHECK_EXPONENT(exponent, t.exponent);
         return {factor + t.factor, exponent};
     }
+
     term &term::operator+=(const term &t) {
         CHECK_EXPONENT(exponent, t.exponent);
         factor += t.factor;
@@ -22,6 +23,7 @@ namespace polynomial {
         CHECK_EXPONENT(exponent, t.exponent);
         return {factor - t.factor, exponent};
     }
+
     term &term::operator-=(const term &t) {
         CHECK_EXPONENT(exponent, t.exponent);
         factor -= t.factor;
@@ -31,16 +33,20 @@ namespace polynomial {
     term term::operator*(const double d) const {
         return {factor * d, exponent};
     }
+
     term &term::operator*=(const double d) {
         factor *= d;
         return *this;
     }
+
     term operator*(double d, const term &t) {
         return {d * t.factor, t.exponent};
     }
+
     term term::operator*(const term &t) const {
         return {factor * t.factor, exponent + t.exponent};
     }
+
     term &term::operator*=(const term &t) {
         factor *= t.factor;
         exponent += t.exponent;
@@ -50,16 +56,20 @@ namespace polynomial {
     term term::operator/(const double d) const {
         return {factor / d, exponent};
     }
+
     term &term::operator/=(const double d) {
         factor /= d;
         return *this;
     }
+
     term operator/(double d, const term &t) {
         return {d / t.factor, -1.0 * t.exponent};
     }
+
     term term::operator/(const term &t) const {
         return {factor / t.factor, exponent - t.exponent};
     }
+
     term &term::operator/=(const term &t) {
         factor /= t.factor;
         exponent -= t.exponent;
@@ -71,14 +81,17 @@ namespace polynomial {
             (*this) += i;
         }
     }
+
     polynomial::polynomial(const polynomial &p) {
         for (auto item: p.terms) {
             terms.insert(item);
         }
     }
+
     polynomial::polynomial(polynomial &&p) : polynomial{p} {
         p.terms.clear();
     }
+
     bool polynomial::traverse(std::function<bool(const term &)> visit) const {
         for (auto item: terms) {
             if (!visit(item.second)) {
@@ -87,6 +100,7 @@ namespace polynomial {
         }
         return true;
     }
+
     bool polynomial::traverse(std::function<bool(term &)> visit) {
         for (auto &item: terms) {
             if (!visit(item.second)) {
@@ -101,6 +115,7 @@ namespace polynomial {
         new_polynomial += t;
         return new_polynomial;
     }
+
     polynomial &polynomial::operator+=(const term &t) {
         if (terms.contains(t.exponent)) {
             terms[t.exponent] += t;
@@ -109,11 +124,13 @@ namespace polynomial {
         }
         return *this;
     }
+
     polynomial polynomial::operator+(const polynomial &p) const {
         polynomial new_polynomial{*this};
         new_polynomial += p;
         return new_polynomial;
     }
+
     polynomial &polynomial::operator+=(const polynomial &p) {
         for (auto item: p.terms) {
             (*this) += item.second;
@@ -126,6 +143,7 @@ namespace polynomial {
         new_polynomial *= t;
         return new_polynomial;
     }
+
     polynomial &polynomial::operator*=(const term &t) {
         std::map<double, term> new_terms;
         for (auto &item: terms) {
@@ -135,11 +153,13 @@ namespace polynomial {
         terms = new_terms;
         return *this;
     }
+
     polynomial polynomial::operator*(const polynomial &p) const {
         polynomial new_polynomial{*this};
         new_polynomial *= p;
         return new_polynomial;
     }
+
     polynomial &polynomial::operator*=(const polynomial &p) {
         std::vector<polynomial> results;
         for (auto item: p.terms) {

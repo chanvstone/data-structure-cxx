@@ -1,5 +1,5 @@
-#ifndef _POLYNOMIAL_H_
-#define _POLYNOMIAL_H_ 1
+#ifndef DATA_STRUCTURE_CPP_POLYNOMIAL_H
+#define DATA_STRUCTURE_CPP_POLYNOMIAL_H 1
 
 #include <functional>
 #include <initializer_list>
@@ -44,6 +44,7 @@ namespace polynomial {
 
     public:
         polynomial() {}
+
         polynomial(std::initializer_list<term> init);
         polynomial(const polynomial &p);
         polynomial(polynomial &&p);
@@ -76,4 +77,4 @@ namespace polynomial {
     };
 } // namespace polynomial
 
-#endif // _POLYNOMIAL_H_
+#endif // DATA_STRUCTURE_CPP_POLYNOMIAL_H
